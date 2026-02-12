@@ -2,14 +2,18 @@ import { Button } from '@/components/ui/button';
 import { useTheme } from '@/contexts/theme-context';
 import { Link } from '@inertiajs/react';
 
-export default function Header() {
+interface HeaderProps {
+    appName: string;
+}
+
+export default function Header({ appName }: HeaderProps) {
     const { isDark, toggleTheme } = useTheme();
 
     return (
         <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="mx-auto flex max-w-[70rem] items-center justify-between border-r border-l px-8 py-4">
                 <Link href="/" className="font-mono text-2xl font-bold">
-                    0DEV
+                    {appName}
                 </Link>
                 <nav className="flex items-center gap-6">
                     <Link href="/" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">

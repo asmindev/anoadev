@@ -6,10 +6,14 @@ import Hero from './components/hero';
 import Mission from './components/mission';
 import Projects from './components/projects';
 
-export default function Home() {
+interface HomeProps {
+    appName: string;
+}
+
+export default function Home({ appName }: HomeProps) {
     return (
         <main className="w-full bg-background text-foreground">
-            <Header />
+            <Header appName={appName} />
             <Hero />
             <Projects />
             <Mission />
