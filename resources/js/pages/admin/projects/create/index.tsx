@@ -17,6 +17,7 @@ interface ProjectFormProps {
             email: string;
         };
         name: string;
+        link: string | null;
         description: string;
         image: string;
         status: string;
@@ -40,6 +41,7 @@ export default function ProjectForm({ project, auth }: ProjectFormProps) {
         client_name: project?.client?.name || '',
         client_email: project?.client?.email || '',
         name: project?.name || '',
+        link: project?.link || '',
         description: project?.description || '',
         image: null as File | null,
         status: project?.status || 'active',
@@ -156,6 +158,19 @@ export default function ProjectForm({ project, auth }: ProjectFormProps) {
                                         className="text-lg"
                                     />
                                     {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
+                                </div>
+
+                                {/* Project Link */}
+                                <div className="space-y-2 md:col-span-2">
+                                    <Label htmlFor="link">Project Link</Label>
+                                    <Input
+                                        id="link"
+                                        type="url"
+                                        value={data.link}
+                                        onChange={(e) => setData('link', e.target.value)}
+                                        placeholder="https://example.com"
+                                    />
+                                    {errors.link && <p className="text-sm text-red-500">{errors.link}</p>}
                                 </div>
 
                                 {/* Description */}

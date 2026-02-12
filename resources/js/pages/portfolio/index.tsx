@@ -1,15 +1,16 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import Footer from '@/pages/homepage/components/footer';
 import Header from '@/pages/homepage/components/header';
 import { Head, Link } from '@inertiajs/react';
-import { Calendar, User } from 'lucide-react';
+import { Calendar, ExternalLink, User } from 'lucide-react';
 
 interface Project {
     id: number;
     name: string;
     description: string;
+    link: string | null;
     image: string | null;
     client_id: number;
     status: string;
@@ -89,6 +90,15 @@ export default function Portfolio({ projects, appName }: PortfolioProps) {
                                             )}
                                         </div>
                                     </CardContent>
+                                    {project.link && (
+                                        <CardFooter className="p-6 pt-0">
+                                            <a href={project.link} target="_blank" rel="noopener noreferrer" className="w-full">
+                                                <Button className="w-full gap-2" variant="outline">
+                                                    Visit Project <ExternalLink className="h-4 w-4" />
+                                                </Button>
+                                            </a>
+                                        </CardFooter>
+                                    )}
                                 </Card>
                             ))}
                         </div>

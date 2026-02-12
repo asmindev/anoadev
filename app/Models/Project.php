@@ -14,6 +14,7 @@ class Project extends Model
         'client_id',
         'name',
         'description',
+        'link',
         'image',
         'status',
         'budget',

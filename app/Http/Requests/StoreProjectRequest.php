@@ -25,6 +25,7 @@ class StoreProjectRequest extends FormRequest
             'client_name' => ['required', 'string', 'max:255'],
             'client_email' => ['required', 'email', 'max:255'],
             'name' => ['required', 'string', 'max:255'],
+            'link' => ['nullable', 'url', 'max:255'],
             'description' => ['nullable', 'string'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
             'status' => ['required', 'in:active,completed,on_hold,cancelled'],
