@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/contexts/theme-context';
-import { Link } from '@inertiajs/react';
+import { cn } from '@/lib/utils';
+import { Link, usePage } from '@inertiajs/react';
 
 interface HeaderProps {
     appName: string;
@@ -8,6 +9,14 @@ interface HeaderProps {
 
 export default function Header({ appName }: HeaderProps) {
     const { isDark, toggleTheme } = useTheme();
+    const { url } = usePage();
+
+    const isActive = (path: string) => {
+        if (path === '/') {
+            return url === '/';
+        }
+        return url.startsWith(path);
+    };
 
     return (
         <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -16,14 +25,41 @@ export default function Header({ appName }: HeaderProps) {
                     {appName}
                 </Link>
                 <nav className="flex items-center gap-6">
-                    <Link href="/" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+                    <Link
+                        href="/"
+                        className={cn(
+                            'relative text-sm font-medium transition-colors hover:text-foreground',
+                            isActive('/') ? 'text-foreground' : 'text-muted-foreground',
+                        )}
+                    >
                         Home
+                        {isActive('/') && (
+                            <span className="absolute right-0 -bottom-[1.3rem] left-0 h-0.5 bg-gradient-to-r from-violet-600 to-indigo-600" />
+                        )}
                     </Link>
-                    <Link href="/portfolio" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+                    <Link
+                        href="/portfolio"
+                        className={cn(
+                            'relative text-sm font-medium transition-colors hover:text-foreground',
+                            isActive('/portfolio') ? 'text-foreground' : 'text-muted-foreground',
+                        )}
+                    >
                         Portfolio
+                        {isActive('/portfolio') && (
+                            <span className="absolute right-0 -bottom-[1.3rem] left-0 h-0.5 bg-gradient-to-r from-violet-600 to-indigo-600" />
+                        )}
                     </Link>
-                    <Link href="/contact" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+                    <Link
+                        href="/contact"
+                        className={cn(
+                            'relative text-sm font-medium transition-colors hover:text-foreground',
+                            isActive('/contact') ? 'text-foreground' : 'text-muted-foreground',
+                        )}
+                    >
                         Contact
+                        {isActive('/contact') && (
+                            <span className="absolute right-0 -bottom-[1.3rem] left-0 h-0.5 bg-gradient-to-r from-violet-600 to-indigo-600" />
+                        )}
                     </Link>
                     <Button onClick={toggleTheme} variant="outline" size="icon" aria-label="Toggle dark mode">
                         {isDark ? (

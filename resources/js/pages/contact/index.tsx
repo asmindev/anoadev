@@ -103,22 +103,58 @@ export default function Contact() {
 
             <main className="flex-1">
                 {/* Hero Section */}
-                <section className="relative overflow-hidden py-12 md:py-24 lg:py-32">
-                    {/* Gradient background blobs */}
+                <section className="relative overflow-hidden py-20 md:py-32 lg:py-40">
+                    {/* Animated gradient background blobs */}
                     <div className="absolute inset-0 -z-10">
-                        <div className="absolute top-1/4 -left-20 h-72 w-72 rounded-full bg-violet-500/20 blur-3xl" />
-                        <div className="absolute top-1/3 right-0 h-72 w-72 rounded-full bg-indigo-500/20 blur-3xl" />
-                        <div className="absolute bottom-0 left-1/3 h-64 w-64 rounded-full bg-purple-500/15 blur-3xl" />
+                        <div className="absolute top-1/4 -left-20 h-96 w-96 animate-pulse rounded-full bg-gradient-to-br from-violet-500/30 to-purple-500/20 blur-3xl" />
+                        <div className="animation-delay-2000 absolute top-1/3 -right-10 h-96 w-96 animate-pulse rounded-full bg-gradient-to-bl from-indigo-500/30 to-blue-500/20 blur-3xl" />
+                        <div className="animation-delay-4000 absolute bottom-10 left-1/3 h-80 w-80 animate-pulse rounded-full bg-gradient-to-tr from-purple-500/20 to-pink-500/15 blur-3xl" />
                     </div>
 
+                    {/* Grid pattern background */}
+                    <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,hsl(var(--border)/0.1)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.1)_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)] bg-[size:4rem_4rem]" />
+
+                    {/* Dot pattern overlay */}
+                    <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,_transparent_0%,_transparent_50%,_hsl(var(--background))_100%)]" />
+
                     <div className="container px-4 md:px-6">
-                        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-                            <div className="rounded-2xl border border-white/20 bg-white/10 px-8 py-10 shadow-lg ring-1 ring-white/10 backdrop-blur-xl sm:px-12 sm:py-14 dark:border-white/10 dark:bg-white/5">
-                                <div className="space-y-4">
-                                    <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">Get In Touch</h1>
-                                    <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                                        Feel free to reach out to us through any of the channels below. We'd love to hear from you.
+                        <div className="flex flex-col items-center justify-center space-y-8 text-center">
+                            {/* Main glass card */}
+                            <div className="group relative rounded-3xl border border-white/20 bg-gradient-to-br from-white/10 via-white/5 to-transparent px-8 py-12 shadow-2xl ring-1 ring-white/10 backdrop-blur-2xl transition-all duration-500 hover:shadow-violet-500/10 sm:px-16 sm:py-16 dark:border-white/10 dark:from-white/5 dark:via-white/[0.02] dark:shadow-violet-500/5">
+                                {/* Shine effect */}
+                                <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-violet-500/0 via-violet-500/5 to-indigo-500/0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+                                {/* Content */}
+                                <div className="relative space-y-6">
+                                    {/* Decorative element */}
+                                    <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-600 shadow-lg shadow-violet-500/20">
+                                        <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                            />
+                                        </svg>
+                                    </div>
+
+                                    <h1 className="bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-3xl font-bold tracking-tighter text-transparent sm:text-5xl md:text-6xl lg:text-7xl">
+                                        Get In Touch
+                                    </h1>
+                                    <p className="mx-auto max-w-[700px] text-base text-muted-foreground/90 sm:text-lg md:text-xl">
+                                        Feel free to reach out to us through any of the channels below. We'd love to hear from you and discuss how we
+                                        can help.
                                     </p>
+
+                                    {/* Floating badges */}
+                                    <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
+                                        <div className="rounded-full border border-violet-500/20 bg-violet-500/10 px-4 py-1.5 text-xs font-medium text-violet-600 backdrop-blur-sm dark:text-violet-400">
+                                            Available 24/7
+                                        </div>
+                                        <div className="rounded-full border border-indigo-500/20 bg-indigo-500/10 px-4 py-1.5 text-xs font-medium text-indigo-600 backdrop-blur-sm dark:text-indigo-400">
+                                            Quick Response
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -126,7 +162,10 @@ export default function Contact() {
                 </section>
 
                 {/* Contact Info Section */}
-                <section className="container px-4 py-12 md:px-6 md:py-24 lg:py-32">
+                <section className="relative container px-4 py-12 md:px-6 md:py-24 lg:py-32">
+                    {/* Subtle grid background for this section */}
+                    <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,hsl(var(--border)/0.05)_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border)/0.05)_1px,transparent_1px)] bg-[size:3rem_3rem]" />
+
                     <div className="mx-auto max-w-4xl space-y-16">
                         {/* Contact Details */}
                         <div className="space-y-6">
