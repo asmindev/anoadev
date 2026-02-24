@@ -1,10 +1,15 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { CompanyProfile } from '@/types';
 import { useEffect, useState } from 'react';
 
-export default function Hero() {
+interface HeroProps {
+    company: CompanyProfile;
+}
+
+export default function Hero({ company }: HeroProps) {
     const [text, setText] = useState('');
-    const fullText = 'Your Digital Partner in Kendari';
+    const fullText = company.tagline || 'Your Digital Partner in Kendari';
     const [isDeleting, setIsDeleting] = useState(false);
     const [loopNum, setLoopNum] = useState(0);
     const [typingSpeed, setTypingSpeed] = useState(150);
@@ -29,7 +34,7 @@ export default function Hero() {
 
         const timer = setTimeout(handleType, typingSpeed);
         return () => clearTimeout(timer);
-    }, [text, isDeleting, loopNum, typingSpeed]);
+    }, [text, isDeleting, loopNum, typingSpeed, fullText]);
 
     return (
         <section className="border-b">
@@ -47,10 +52,12 @@ export default function Hero() {
                                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-violet-400 opacity-75"></span>
                                 <span className="relative inline-flex h-2 w-2 rounded-full bg-violet-500"></span>
                             </span>
-                            <span className="font-mono text-xs">Kendari, Sulawesi Tenggara</span>
+                            <span className="font-mono text-xs">
+                                {company.city && company.province ? `${company.city}, ${company.province}` : 'Kendari, Sulawesi Tenggara'}
+                            </span>
                         </Badge>
                     </div>
-                    <h1 className="mb-6 font-mono text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">ANOADEV</h1>
+                    <h1 className="mb-6 font-mono text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl">{company.name.toUpperCase()}</h1>
                     <span className="inline-block bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text font-mono text-4xl font-bold tracking-tight text-transparent sm:text-6xl md:text-7xl">
                         {text}
                         <span className="animate-pulse">|</span>

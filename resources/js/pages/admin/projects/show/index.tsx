@@ -2,7 +2,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import AdminLayout from '@/layouts/admin-layout';
-import { Link } from '@inertiajs/react';
+import { SharedData } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
 
 interface Client {
     id: number;
@@ -27,10 +28,6 @@ interface Project {
 
 interface ProjectShowProps {
     project: Project;
-    user?: {
-        name: string;
-        email: string;
-    };
 }
 
 const statusColors = {
@@ -47,7 +44,9 @@ const statusLabels = {
     cancelled: 'Cancelled',
 };
 
-export default function ProjectShow({ project, user }: ProjectShowProps) {
+export default function ProjectShow({ project }: ProjectShowProps) {
+    const { auth } = usePage<SharedData>().props;
+
     const formatCurrency = (amount: string) => {
         return new Intl.NumberFormat('id-ID', {
             style: 'currency',
@@ -66,7 +65,7 @@ export default function ProjectShow({ project, user }: ProjectShowProps) {
     };
 
     return (
-        <AdminLayout user={user}>
+        <AdminLayout user={auth.user}>
             <div className="space-y-6">
                 {/* Header */}
                 <div className="flex items-center justify-between">

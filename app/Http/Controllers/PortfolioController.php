@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PortfolioController extends Controller
 {
@@ -19,7 +19,6 @@ class PortfolioController extends Controller
 
         return Inertia::render('portfolio/index', [
             'projects' => $projects,
-            'appName' => config('app.name'),
         ]);
     }
 }

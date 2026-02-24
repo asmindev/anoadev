@@ -14,7 +14,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import AdminLayout from '@/layouts/admin-layout';
-import { Link, router } from '@inertiajs/react';
+import { SharedData } from '@/types';
+import { Link, router, usePage } from '@inertiajs/react';
 import { ArrowUpRight, Calendar, Filter, Folder, MoreHorizontal, Plus, Search } from 'lucide-react';
 import { useState } from 'react';
 
@@ -48,10 +49,6 @@ interface ProjectsIndexProps {
         status?: string;
         search?: string;
     };
-    user?: {
-        name: string;
-        email: string;
-    };
 }
 
 const statusColors = {
@@ -68,7 +65,8 @@ const statusLabels = {
     cancelled: 'Cancelled',
 };
 
-export default function ProjectsIndex({ projects, filters, user }: ProjectsIndexProps) {
+export default function ProjectsIndex({ projects, filters }: ProjectsIndexProps) {
+    const { auth } = usePage<SharedData>().props;
     const [search, setSearch] = useState(filters.search || '');
     const [statusFilter, setStatusFilter] = useState(filters.status || 'all');
     const [deleteDialog, setDeleteDialog] = useState<{ open: boolean; project: Project | null }>({
@@ -124,7 +122,7 @@ export default function ProjectsIndex({ projects, filters, user }: ProjectsIndex
     };
 
     return (
-        <AdminLayout user={user}>
+        <AdminLayout user={auth.user}>
             <div className="space-y-6">
                 {/* Header */}
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

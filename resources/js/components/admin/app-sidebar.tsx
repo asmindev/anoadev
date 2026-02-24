@@ -1,7 +1,17 @@
 import { NavMain } from '@/components/admin/nav-main';
 import { NavUser } from '@/components/admin/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from '@/components/ui/sidebar';
-import { Link } from '@inertiajs/react';
+import { SharedData } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
+import { ComponentPropsWithoutRef } from 'react';
+
+interface AppSidebarProps extends ComponentPropsWithoutRef<typeof Sidebar> {
+    user?: {
+        name: string;
+        email: string;
+        avatar?: string;
+    };
+}
 
 export function AppSidebar({ user, ...props }: AppSidebarProps) {
     const navItems = [
@@ -90,22 +100,6 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
             isActive: window.location.pathname.startsWith('/admin/clients'),
         },
         {
-            title: 'Messages',
-            url: '/admin/messages',
-            icon: (
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                </svg>
-            ),
-            badge: '12',
-            isActive: window.location.pathname.startsWith('/admin/messages'),
-        },
-        {
             title: 'Analytics',
             url: '/admin/analytics',
             icon: (
@@ -122,7 +116,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
         },
         {
             title: 'Settings',
-            url: '/admin/settings',
+            url: route('admin.settings.index'),
             icon: (
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path
@@ -134,36 +128,38 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
             ),
-            isActive: window.location.pathname.startsWith('/admin/settings'),
+            isActive: route().current('admin.settings.*'),
             items: [
                 {
-                    title: 'General',
-                    url: '/admin/settings',
-                    isActive: window.location.pathname === '/admin/settings',
-                },
-                {
-                    title: 'Profile',
-                    url: '/admin/settings/profile',
-                    isActive: window.location.pathname === '/admin/settings/profile',
-                },
-                {
-                    title: 'Security',
-                    url: '/admin/settings/security',
-                    isActive: window.location.pathname === '/admin/settings/security',
+                    title: 'Company Profile',
+                    url: route('admin.settings.index'),
+                    isActive: route().current('admin.settings.index'),
                 },
             ],
         },
     ];
 
+    const { company } = usePage<SharedData>().props;
+    const initials = company.name
+        .split(' ')
+        .map((w) => w[0])
+        .join('')
+        .substring(0, 2)
+        .toUpperCase();
+
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>
                 <Link href="/admin" className="flex items-center gap-2 px-2 py-3">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600">
-                        <span className="font-mono text-sm font-bold text-white">AD</span>
-                    </div>
+                    {company.logo ? (
+                        <img src={`/storage/${company.logo}`} alt={company.name} className="h-8 w-8 rounded-lg object-cover" />
+                    ) : (
+                        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600">
+                            <span className="font-mono text-sm font-bold text-white">{initials}</span>
+                        </div>
+                    )}
                     <div className="flex flex-col group-has-data-[collapsible=icon]/sidebar-wrapper:hidden">
-                        <span className="font-mono text-sm font-semibold">AnoadDev</span>
+                        <span className="font-mono text-sm font-semibold">{company.name}</span>
                         <span className="text-xs text-muted-foreground">Admin Panel</span>
                     </div>
                 </Link>

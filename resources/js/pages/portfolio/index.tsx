@@ -3,7 +3,8 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import Footer from '@/pages/homepage/components/footer';
 import Header from '@/pages/homepage/components/header';
-import { Head, Link } from '@inertiajs/react';
+import { SharedData } from '@/types';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { Calendar, ExternalLink, User } from 'lucide-react';
 
 interface Project {
@@ -22,14 +23,15 @@ interface Project {
 
 interface PortfolioProps {
     projects: Project[];
-    appName: string;
 }
 
-export default function Portfolio({ projects, appName }: PortfolioProps) {
+export default function Portfolio({ projects }: PortfolioProps) {
+    const { company } = usePage<SharedData>().props;
+
     return (
         <div className="flex min-h-screen flex-col bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
             <Head title="Portfolio" />
-            <Header appName={appName} />
+            <Header appName={company.name} />
 
             <main className="flex-1">
                 {/* Hero Section */}
@@ -119,7 +121,7 @@ export default function Portfolio({ projects, appName }: PortfolioProps) {
                 </section>
             </main>
 
-            <Footer />
+            <Footer company={company} />
         </div>
     );
 }

@@ -1,8 +1,13 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { CompanyProfile } from '@/types';
 
-export default function Contact() {
+interface ContactProps {
+    company: CompanyProfile;
+}
+
+export default function Contact({ company }: ContactProps) {
     return (
         <section id="contact" className="w-full border-b">
             <div className="relative mx-auto max-w-[70rem] border-r border-l px-6 py-12">
@@ -39,7 +44,11 @@ export default function Contact() {
                                 </div>
                                 <div>
                                     <p className="font-semibold">Location</p>
-                                    <p className="text-sm text-muted-foreground">Kendari, Sulawesi Tenggara, Indonesia</p>
+                                    <p className="text-sm text-muted-foreground">
+                                        {company.city && company.province
+                                            ? `${company.city}, ${company.province}, Indonesia`
+                                            : 'Kendari, Sulawesi Tenggara, Indonesia'}
+                                    </p>
                                 </div>
                             </CardContent>
                         </Card>
@@ -58,7 +67,7 @@ export default function Contact() {
                                 </div>
                                 <div>
                                     <p className="font-semibold">Email</p>
-                                    <p className="text-sm text-muted-foreground">hello@anoadev.com</p>
+                                    <p className="text-sm text-muted-foreground">{company.email || 'hello@anoadev.com'}</p>
                                 </div>
                             </CardContent>
                         </Card>
@@ -77,7 +86,7 @@ export default function Contact() {
                                 </div>
                                 <div>
                                     <p className="font-semibold">Phone</p>
-                                    <p className="text-sm text-muted-foreground">+62 xxx-xxxx-xxxx</p>
+                                    <p className="text-sm text-muted-foreground">{company.phone || '+62 xxx-xxxx-xxxx'}</p>
                                 </div>
                             </CardContent>
                         </Card>
@@ -98,7 +107,7 @@ export default function Contact() {
                         <p className="text-lg font-medium">We're excited to work with you on your next project.</p>
                         <div className="pt-4">
                             <Button asChild size="lg" className="bg-violet-600 hover:bg-violet-700">
-                                <a href="mailto:hello@anoadev.com">Contact Us</a>
+                                <a href={`mailto:${company.email || 'hello@anoadev.com'}`}>Contact Us</a>
                             </Button>
                         </div>
                     </CardContent>

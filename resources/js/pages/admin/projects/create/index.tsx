@@ -5,7 +5,8 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import AdminLayout from '@/layouts/admin-layout';
-import { Link, useForm } from '@inertiajs/react';
+import { SharedData } from '@/types';
+import { Link, useForm, usePage } from '@inertiajs/react';
 import { ImagePlus, X } from 'lucide-react';
 import { useState } from 'react';
 
@@ -25,15 +26,10 @@ interface ProjectFormProps {
         start_date: string;
         end_date: string;
     };
-    auth: {
-        user: {
-            name: string;
-            email: string;
-        };
-    };
 }
 
-export default function ProjectForm({ project, auth }: ProjectFormProps) {
+export default function ProjectForm({ project }: ProjectFormProps) {
+    const { auth } = usePage<SharedData>().props;
     const isEditing = !!project;
     const [preview, setPreview] = useState<string | null>(project?.image ? `/storage/${project.image}` : null);
 

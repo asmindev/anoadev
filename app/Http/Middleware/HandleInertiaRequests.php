@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\CompanyProfile;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -38,12 +39,32 @@ class HandleInertiaRequests extends Middleware
     {
         [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
 
+        $company = CompanyProfile::getInstance();
+
         return [
             ...parent::share($request),
             'name' => config('app.name'),
             'quote' => ['message' => trim($message), 'author' => trim($author)],
             'auth' => [
                 'user' => $request->user(),
+            ],
+            'company' => [
+                'name' => $company->name,
+                'tagline' => $company->tagline,
+                'description' => $company->description,
+                'logo' => $company->logo,
+                'email' => $company->email,
+                'phone' => $company->phone,
+                'whatsapp' => $company->whatsapp,
+                'address' => $company->address,
+                'city' => $company->city,
+                'province' => $company->province,
+                'website' => $company->website,
+                'instagram' => $company->instagram,
+                'github' => $company->github,
+                'linkedin' => $company->linkedin,
+                'facebook' => $company->facebook,
+                'twitter' => $company->twitter,
             ],
         ];
     }

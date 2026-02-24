@@ -1,24 +1,22 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import AdminLayout from '@/layouts/admin-layout';
+import { SharedData } from '@/types';
+import { usePage } from '@inertiajs/react';
 
 interface DashboardProps {
-    appName: string;
     stats: {
         projects: number;
         activeProjects: number;
         clients: number;
         messages: number;
     };
-    user?: {
-        name: string;
-        email: string;
-        avatar?: string;
-    };
 }
 
-export default function Dashboard({ appName, stats, user }: DashboardProps) {
+export default function Dashboard({ stats }: DashboardProps) {
+    const { auth } = usePage<SharedData>().props;
+
     return (
-        <AdminLayout user={user}>
+        <AdminLayout user={auth.user}>
             <div className="space-y-6">
                 {/* Welcome Section */}
                 <div>

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Client;
+use App\Models\CompanyProfile;
 use App\Models\Message;
 use App\Models\Project;
 use App\Models\User;
@@ -36,5 +37,8 @@ class DatabaseSeeder extends Seeder
 
         // Create messages (contact form submissions)
         Message::factory(25)->create();
+
+        // Create company profile
+        CompanyProfile::factory()->create();
     }
 }
