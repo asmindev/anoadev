@@ -101,7 +101,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
         },
         {
             title: 'Analytics',
-            url: '/admin/analytics',
+            url: route('admin.analytics'),
             icon: (
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path
@@ -112,7 +112,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                     />
                 </svg>
             ),
-            isActive: window.location.pathname.startsWith('/admin/analytics'),
+            isActive: route().current('admin.analytics'),
         },
         {
             title: 'Settings',

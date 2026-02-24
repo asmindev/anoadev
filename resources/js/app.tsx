@@ -20,7 +20,7 @@ window.route = ziggyRoute;
 globalThis.route = ziggyRoute;
 
 createInertiaApp({
-    title: (title) => (title ? `${title} - ${appName}` : appName),
+    title: (title) => (title ? `${title} - ${appName}` : appName) + ' | Digital Business Partner',
     resolve: (name) => resolvePageComponent(`./pages/${name}.tsx`, import.meta.glob('./pages/**/*.tsx')),
     setup({ el, App, props }) {
         const root = createRoot(el);

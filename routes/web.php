@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\VisitorController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -30,6 +31,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', [CompanyProfileController::class, 'edit'])->name('index');
         Route::put('/', [CompanyProfileController::class, 'update'])->name('update');
     });
+
+    // Analytics
+    Route::get('/analytics', [VisitorController::class, 'index'])->name('analytics');
 });
 
 // Redirect global untuk /dashboard (di luar prefix admin)

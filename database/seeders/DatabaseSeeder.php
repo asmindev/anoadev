@@ -7,6 +7,7 @@ use App\Models\CompanyProfile;
 use App\Models\Message;
 use App\Models\Project;
 use App\Models\User;
+use App\Models\Visitor;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -40,5 +41,8 @@ class DatabaseSeeder extends Seeder
 
         // Create company profile
         CompanyProfile::factory()->create();
+
+        // Create visitor stats
+        Visitor::factory(200)->create();
     }
 }
