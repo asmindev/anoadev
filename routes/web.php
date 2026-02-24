@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyProfileController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\ProjectController;
@@ -12,6 +13,8 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/portfolio', PortfolioController::class)->name('portfolio');
+
+Route::get('/contact', ContactController::class)->name('contact');
 // redirect `/admin` or '/dashboard' to the dashboard route
 Route::prefix('admin')->name('admin.')->group(function () {
     // Redirects: Menangani /admin dan /dashboard ke /admin/dashboard
