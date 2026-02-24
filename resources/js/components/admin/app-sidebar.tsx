@@ -152,7 +152,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
             <SidebarHeader>
                 <Link href="/admin" className="flex items-center gap-2 px-2 py-3">
                     {company.logo ? (
-                        <img src={`/storage/${company.logo}`} alt={company.name} className="h-8 w-8 rounded-lg object-cover" />
+                        <img src={`/storage/${company.logo}`} alt={company.name} className="h-8 w-8 rounded-lg border object-contain px-0.5" />
                     ) : (
                         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-violet-600 to-indigo-600">
                             <span className="font-mono text-sm font-bold text-white">{initials}</span>
